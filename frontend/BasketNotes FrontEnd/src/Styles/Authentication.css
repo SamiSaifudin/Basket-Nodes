@@ -1,0 +1,29 @@
+.Form-Container {
+    flex: 1 1 15rem;
+    background: var(--main-color);
+
+    text-align: center;
+
+    padding: 2rem;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+  
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--third-color);
+}
+  
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+  
