@@ -40,11 +40,11 @@ const updateGame = async (req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(id)) {return res.status(400).json({error: "Game does not exist!"})}
 
-    const game = await Game.findOneAndUpdate({_id: id}, ...req.body)
+    const game = await Game.findOneAndUpdate({_id: id}, req.body)
     
-    if (!game){return res.status(400).json({error: "Game does not exist!"})}
+    if (!game) {return res.status(400).json({error: "Game does not exist!"})}
         
-    res.status(200).json()
+    res.status(200).json(game)
 }
 
 // delete a game 
