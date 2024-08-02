@@ -24,6 +24,11 @@ const getGame = async (req, res) => {
 // create a new game 
 const createGame = async (req, res) => {
     const {title, points, rebounds, assists, fg} = req.body
+
+    const gameCheck =  await Game.findOne({title: title})
+
+    if (gameCheck){return res.status(400).json({error: "Game with that name already exists!"})}
+
     try {
         const game = await Game.create({title, points, rebounds, assists, fg})
         res.status(200).json(game)

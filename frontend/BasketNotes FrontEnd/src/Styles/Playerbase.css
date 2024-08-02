@@ -1,50 +1,28 @@
-.games-container {
+.player-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px; /* Adjust the gap between boxes as needed */
-    max-width: 100%;
-    margin: 0 auto;
-    overflow-y: auto;
-}
-  
-.games-box {
-    background-color: var(--main-color);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-}
-  
-.games-box h2 {
-    margin-top: 0;
-}
-  
-.games-box ul {
-    list-style-type: none;
-    padding: 0;
-}
-  
-.games-box li {
-    margin-bottom: 8px;
+    grid-template-columns: 3fr 1fr;
+    gap: 100px;
+    margin-top: 70px;
 }
 
-.add-game-button {
-    width: 100px; /* Adjust the size as needed */
-    height: 100px; /* Adjust the size as needed */
-    border-radius: 50%; /* Makes the button circular */
-    background-color: #333; /* A shade lighter than black */
-    color: var(--second-color); /* Color of the + symbol */
-    font-size: 24px; /* Adjust the size of the + symbol */
-    border: none; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+.form-group-2{
+    margin-bottom: 0.5rem;
 }
   
-.add-game-button:hover {
-    background-color: #555; /* Slightly lighter shade for hover effect */
+.form-group-2 label{
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--third-color);
 }
   
+.form-group-2 input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+.form-2-Container button{
+    margin-top: 1rem;
+}

@@ -1,39 +1,50 @@
-import '../Styles/Playerbase.css'
-import React, { useState } from "react";
-import Add from './AddModal'; 
+import '../Styles/Playerbase.css';
+import React, { useEffect, useState } from "react";
+import Navbar from '../Components/Navbar';
+import GameDetails from '../Components/GameDetails';
+import AddGame from '../Components/AddGame';
+import axios from "axios";
+import { useGamesContext } from '../hooks/UseGamesContext'
 
 function Playerbase(){
-    const username = "Sami Saifudin";
-    const points = 25;
-    const assists = 7;
-    const rebounds = 5; 
-    const [modalAddOpen, setModalAddOpen] = useState(false);
+    const {games, dispatch} = useGamesContext()
 
-    const games = [
-        { name: "HS Game 1", points, assists, rebounds },
-        { name: "HS Game 2", points, assists, rebounds },
-        { name: "HS Game 3", points, assists, rebounds },
-        { name: "HS Game 4", points, assists, rebounds },
-        { name: "HS Game 5", points, assists, rebounds },
-        { name: "HS Game 6", points, assists, rebounds },
-        { name: "HS Game 7", points, assists, rebounds }
-    ];
+    useEffect(() => {
+        const fetchGames = async () => {
+            axios.get("http://localhost:4000/BasketNodes/games")
+            .then(response => {
+                dispatch({type: 'SET_GAMES', payload: response.data})
+            })
+            .catch(error => {
+                console.error('Error making GET request:', error);
+
+                // Check if there is a response and if it contains data
+                if (error.response && error.response.data && error.response.data.error) {
+                    alert(error.response.data.error);
+                } else {
+                    alert('An error occurred while making the request.');
+                }
+            });
+        }
+        
+        fetchGames();
+    }, [])
 
     return (
-        <>
-            <h1>Hello <span className="highlight">{username}</span></h1> 
+        <>  
+            <Navbar/>
 
-            <h2>Past Games: </h2>
-            <div className="games-container">
-                
-                <button 
-                    className='add-game-button'
-                    onClick={() => {
-                        setModalAddOpen(true);
-                    }}
-                >+</button>
+            <div className='player-container'> 
+
+                <div className='games'>
+                    {games && games.map((game) => (
+                        <GameDetails key={game._id} game = {game}/>
+                    ))}
+                </div>
+                <AddGame/>
 
             </div>
+            
         </>
     );
 }

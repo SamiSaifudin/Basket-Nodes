@@ -1,0 +1,30 @@
+
+.game-container {
+    background:  var(--main-color);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 20px auto;
+    position: relative;
+    max-width: 300px;
+    max-height: 150px;
+    width: 30rem;
+    margin-bottom: 15px;
+}
+
+.game-container h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: var(--third-color);
+}
+
+.game-container p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--third-color);
+}
+
+.game-container .delete-button {
+    position: absolute;
+    top:20px;
+    right:20px;
+}

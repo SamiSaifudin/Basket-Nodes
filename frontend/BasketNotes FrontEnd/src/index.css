@@ -80,4 +80,26 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+header {
+  background: #232323;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1150px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+
+
 
