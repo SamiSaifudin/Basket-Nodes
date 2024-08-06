@@ -1,25 +1,26 @@
-import React, { useState } from 'react'
 import axios from "axios"
+import React, { useState } from 'react'
+import { useAuthContext } from '../hooks/UseAuthContext'
 import { useGamesContext } from '../hooks/UseGamesContext'
 
 function AddGame(){
-    const { dispatch } = useGamesContext();
-    const [title, setTitle] = useState(''); 
-    const [points, setPoints] = useState('');
-    const [rebounds, setRebounds] = useState('');
-    const [assists, setAssists] = useState('');
-    const [shotsTaken, setShotsTaken] = useState('');
-    const [shotsMade, setShotsMade] = useState('');
-      
+    const { dispatch } = useGamesContext()
+    const [title, setTitle] = useState('')
+    const [points, setPoints] = useState('')
+    const [rebounds, setRebounds] = useState('')
+    const [assists, setAssists] = useState('')
+    const [shotsTaken, setShotsTaken] = useState('')
+    const [shotsMade, setShotsMade] = useState('')
+    const { player } = useAuthContext()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let shotsMadeInt = Number(shotsMade);
-        let shotsTakenInt = Number(shotsTaken);
+        let shotsMadeInt = Number(shotsMade)
+        let shotsTakenInt = Number(shotsTaken)
 
         if (shotsMadeInt > shotsTakenInt) {
-            alert("Error: Shots Made can't be greater than Shots Taken"); 
+            alert("Error: Shots Made can't be greater than Shots Taken")
             return; 
         }
 
@@ -33,26 +34,27 @@ function AddGame(){
 
         const config = {
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${player.token}`
             }
         };
 
-        axios.post("http://localhost:4000/BasketNodes/games", JSON.stringify(game), config)
+        axios.post(`${import.meta.env.VITE_APP_API_URL}/games`, JSON.stringify(game), config)
             .then(response => {
             dispatch({type: 'CREATE_GAME', payload: response.data})
-            setTitle('');
-            setPoints('');
-            setRebounds('');
-            setAssists('');
-            setShotsTaken('');
-            setShotsMade('');
+            setTitle('')
+            setPoints('')
+            setRebounds('')
+            setAssists('')
+            setShotsTaken('')
+            setShotsMade('')
         })
         .catch(error => {
-            console.error('Error making POST request:', error);
+            console.error('Error making POST request:', error)
             if (error.response && error.response.data && error.response.data.error) {
                 alert(error.response.data.error);
             } else {
-                alert('An error occurred while making the request.');
+                alert('An error occurred while making the request.')
             }
         });
     };
@@ -70,6 +72,7 @@ function AddGame(){
                                 id="title"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
+                                maxLength="15"
                                 required
                             />
                     </div>

@@ -4,9 +4,7 @@ import { useContext } from 'react'
 export const useGamesContext = () => {
     const context = useContext(GamesContext)
 
-    if (!context){
-        throw Error("React Context Error")
-    }
+    if (!context){throw Error("React Games Context Error")}
     return context
 }
 

@@ -1,13 +1,22 @@
-import '../Styles/Details.css';
-import axios from "axios";
+import axios from "axios"
+import '../Styles/Details.css'
 import { useGamesContext } from '../hooks/UseGamesContext'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { useAuthContext } from '../hooks/UseAuthContext'
 
 function GameDetails ({game}) {
     const { dispatch } = useGamesContext();
+    const { player } = useAuthContext()
 
     const handleClick = async () => {
-        axios.delete(`http://localhost:4000/BasketNodes/games/${game._id}`)
+
+        const config = {
+            headers: {
+              'Authorization': `Bearer ${player.token}`
+            }
+        };
+
+        axios.delete(`${import.meta.env.VITE_APP_API_URL}/games/${game._id}`, config)
             .then(response => {
                 dispatch({type: 'DELETE_GAME', payload: response.data})
         })

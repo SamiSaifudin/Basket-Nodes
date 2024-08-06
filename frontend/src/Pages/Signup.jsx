@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import '../Styles/Authentication.css';
+import React, { useState } from 'react'
+import '../Styles/Authentication.css'
+import { UseSignup } from '../hooks/UseSignup'
 
 function Signup() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const {signup, error, isLoading} = UseSignup() 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert('Passwords do not match');
-      return;
+
+    if (password === confirmPassword){
+      await signup(username.trim(), password)
+    }else{
+      alert("Passwords must match")
     }
-    // Handle sign-up logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
   };
 
   return (
@@ -29,6 +30,7 @@ function Signup() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            maxLength="50"
           />
         </div>
         <div className="form-group">
@@ -54,6 +56,7 @@ function Signup() {
         <button type="submit">Sign Up</button>
       </form>
     </div>
+    
   );
 }
 

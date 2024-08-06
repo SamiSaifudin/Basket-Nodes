@@ -3,7 +3,10 @@ const mongoose = require('mongoose')
 
 // get all games
 const getAllGames = async (req, res) => {
-    const games = await Game.find({}).sort({createdAt: -1})
+
+    const player_id = req.player._id
+
+    const games = await Game.find({ player_id }).sort({createdAt: -1})
     
     res.status(200).json(games)
 }
@@ -28,9 +31,10 @@ const createGame = async (req, res) => {
     const gameCheck =  await Game.findOne({title: title})
 
     if (gameCheck){return res.status(400).json({error: "Game with that name already exists!"})}
-
+    
     try {
-        const game = await Game.create({title, points, rebounds, assists, fg})
+        const player_id = req.player._id
+        const game = await Game.create({title, points, rebounds, assists, fg, player_id})
         res.status(200).json(game)
     } catch (error){
         res.status(400).json({error: error.message})

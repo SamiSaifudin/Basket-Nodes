@@ -1,34 +1,44 @@
-import '../Styles/Playerbase.css';
-import React, { useEffect, useState } from "react";
-import Navbar from '../Components/Navbar';
-import GameDetails from '../Components/GameDetails';
-import AddGame from '../Components/AddGame';
-import axios from "axios";
+import '../Styles/Playerbase.css'
+import React, { useEffect, useState } from "react"
+import Navbar from '../Components/Navbar'
+import GameDetails from '../Components/GameDetails'
+import AddGame from '../Components/AddGame'
+import axios from "axios"
 import { useGamesContext } from '../hooks/UseGamesContext'
+import { useAuthContext } from '../hooks/UseAuthContext'
 
 function Playerbase(){
     const {games, dispatch} = useGamesContext()
 
+    const { player } = useAuthContext()
+
     useEffect(() => {
         const fetchGames = async () => {
-            axios.get("http://localhost:4000/BasketNodes/games")
+
+            const config = {
+                headers: {
+                  'Authorization': `Bearer ${player.token}`
+                }
+            };
+            
+            axios.get(`${import.meta.env.VITE_APP_API_URL}/games`, config)
             .then(response => {
                 dispatch({type: 'SET_GAMES', payload: response.data})
             })
             .catch(error => {
                 console.error('Error making GET request:', error);
 
-                // Check if there is a response and if it contains data
                 if (error.response && error.response.data && error.response.data.error) {
-                    alert(error.response.data.error);
+                    alert(error.response.data.error)
                 } else {
-                    alert('An error occurred while making the request.');
+                    alert('An error occurred while making the request.')
                 }
             });
         }
-        
-        fetchGames();
-    }, [])
+        if (player){
+            fetchGames()
+        }
+    }, [dispatch, player])
 
     return (
         <>  

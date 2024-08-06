@@ -75,10 +75,7 @@ button:hover {
   border-color: var(--fourth-color);
   background-color: var(--fourth-color);
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+
 
 header {
   background: #232323;
@@ -100,6 +97,9 @@ header {
   width: 100%;
 }
 
+.nav-container span{
+  margin-right: 50px;
+}
 
 
 

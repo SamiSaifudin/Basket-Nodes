@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const gameRoutes = require('./routes/games')
+const playerRoutes = require('./routes/player')
 const mongoose = require('mongoose')
 const cors = require('cors')
 
@@ -21,6 +22,7 @@ app.use(cors({origin: process.env.FRONTEND_LINK}))
 
 // routes 
 app.use('/BasketNodes/games', gameRoutes)
+app.use('/BasketNodes/player', playerRoutes)
 
 // connect to databse 
 mongoose.connect(process.env.MONGODB_URL)

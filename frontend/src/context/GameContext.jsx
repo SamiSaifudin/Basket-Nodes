@@ -1,6 +1,5 @@
 import { createContext, useReducer } from 'react'
 
-
 export const GamesContext = createContext()
 
 export const gamesReducer = (state, action) => {

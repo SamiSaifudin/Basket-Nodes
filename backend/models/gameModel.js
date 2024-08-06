@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 const gameShema = new Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     points: {
         type: Number,
@@ -21,6 +22,10 @@ const gameShema = new Schema({
     },
     fg: {
         type: Number,
+        required: true
+    },
+    player_id: {
+        type: String,
         required: true
     }
 }, { timestamps: true })

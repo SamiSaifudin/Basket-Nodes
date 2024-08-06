@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import '../Styles/Authentication.css';
+import { UseSignin } from '../hooks/UseSignin';
+import Navbar from '../Components/Navbar';
 
 function Signin(){
-    const [username, setUserName] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUserName] = useState('')
+    const [password, setPassword] = useState('')
+    const {signin, error, isLoading} = UseSignin() 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Username:', username);
-        console.log('Password:', password);
+        await signin(username.trim(), password)
     };
 
     return (
