@@ -1,6 +1,6 @@
 # Basket-Nodes
 
-An application that will allow users to keep track of their basketball game stats.
+A web application that will allow users to keep track of their basketball game stats.
 
 ## Technologies Used
 
